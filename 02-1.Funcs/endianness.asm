@@ -1,6 +1,8 @@
 section .data
     newline_char: db 10
     codes: db '0123456789abcdef'
+    demo1: db 'aloha', 10
+    demo2: db 0x00, 0x00, 0x00, 0x61, 0x68, 0x6f, 0x6c, 0x61
 
 section .text
 global _start
@@ -41,12 +43,15 @@ iterate:
 
     ret
 
-_start:
-    mov rdi, 0x1122334455667788
-    call print_newline
+_start: 
+    mov rdi, [demo1]
     call print_hex
     call print_newline
 
-    mov rax, 60
+    mov rdi, [demo2]
+    call print_hex
+    call print_newline
+
+    mov rax, 60;exit call
     xor rdi, rdi
     syscall
